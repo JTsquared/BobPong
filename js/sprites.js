@@ -34,6 +34,7 @@ export class SpriteLoader {
         this.load('cup', CONFIG.CUP_IMAGE);
         this.load('bob', CONFIG.BOB_IMAGE);
         this.load('bobAlt', CONFIG.BOB_ALT_IMAGE);
+        this.load('bartender', CONFIG.BARTENDER_IMAGE);
         this.load('arm', CONFIG.ARM_IMAGE);
         this.load('throwSheet', CONFIG.THROW_SHEET);
     }

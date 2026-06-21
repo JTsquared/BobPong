@@ -43,6 +43,13 @@ export const CONFIG = {
     BOB_OFFSET_Y: -170,        // shift up from table top edge (negative = higher)
     BOB_ALT_OFFSET_Y: -130,     // adjusted for smaller size
 
+    // Bartender (top-left corner, behind bar counter, only with original background)
+    BARTENDER_IMAGE: 'assets/spritesheets/bar_tender.png',
+    BARTENDER_WIDTH: 158,
+    BARTENDER_HEIGHT: 178,
+    BARTENDER_X: 76,            // pixels from left edge of canvas
+    BARTENDER_Y: 0,             // top of image at top of canvas (head cropped off)
+
     // Table image — scaled 1.255x from native 408x612 (92% of previous 1.364x)
     TABLE_IMAGE: 'assets/spritesheets/BobPong_Table.png',
     TABLE_IMG_WIDTH: 408,

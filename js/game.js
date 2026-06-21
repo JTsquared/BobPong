@@ -214,6 +214,7 @@ export class Game {
 
         // Background
         this.renderer.drawBackground();
+        if (this.useAltBg) this.renderer.drawBartender();
         this.renderer.drawBob(this.useAltBob);
         this.renderer.drawTable();
         this.drawCupsForDisplay();
@@ -1121,6 +1122,7 @@ export class Game {
     drawPlaying() {
         // Draw scene: background → table → cups
         this.renderer.drawBackground(this._getCurrentBgSprite());
+        if (this.useAltBg) this.renderer.drawBartender();
         this.renderer.drawBob(this.useAltBob);
         this.renderer.drawTable();
 
@@ -1232,6 +1234,7 @@ export class Game {
 
         // Background
         this.renderer.drawBackground(this._getCurrentBgSprite());
+        if (this.useAltBg) this.renderer.drawBartender();
         this.renderer.drawBob(this.useAltBob);
         this.renderer.drawTable();
         this.drawCupsForDisplay();
@@ -1433,6 +1436,7 @@ export class Game {
     drawTestMode() {
         // Draw scene same as playing
         this.renderer.drawBackground();
+        if (this.useAltBg) this.renderer.drawBartender();
         this.renderer.drawBob(this.useAltBob);
         this.renderer.drawTable();
 

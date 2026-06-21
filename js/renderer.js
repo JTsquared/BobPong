@@ -25,6 +25,16 @@ export class Renderer {
         }
     }
 
+    drawBartender() {
+        const img = this.sprites.get('bartender');
+        if (!img) return;
+        this.ctx.drawImage(
+            img,
+            CONFIG.BARTENDER_X, CONFIG.BARTENDER_Y,
+            CONFIG.BARTENDER_WIDTH, CONFIG.BARTENDER_HEIGHT
+        );
+    }
+
     drawBob(useAlt = false) {
         const spriteName = useAlt ? 'bobAlt' : 'bob';
         const bob = this.sprites.get(spriteName);
