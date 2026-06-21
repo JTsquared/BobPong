@@ -120,7 +120,7 @@ export class Game {
         this.onlineLobbyState = 'choose'; // 'choose', 'hosting', 'joining', 'connecting', 'connected'
         this.roomCodeInput = '';
         this.onlineStatusMessage = '';
-        this.signalingUrl = 'ws://193.122.187.79:3001';
+        this.signalingUrl = 'wss://blazegames.store/bobpong-ws/';
     }
 
     getCurrentZones() {
