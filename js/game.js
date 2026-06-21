@@ -76,6 +76,9 @@ export class Game {
         this.farCups = createFarFormation();
 
         this.splash = new Animation(8, 12, false);
+        this.useAltBg = false;     // randomly chosen per game
+        this.bgAltFrame = 0;
+        this.bgAltTimer = 0;
         this.power = 0;
         this.aimAngle = 0;
         this.turnSwitchTimer = 0;
@@ -211,7 +214,7 @@ export class Game {
 
         // Background
         this.renderer.drawBackground();
-        this.renderer.drawBob();
+        this.renderer.drawBob(this.useAltBob);
         this.renderer.drawTable();
         this.drawCupsForDisplay();
 
@@ -694,6 +697,12 @@ export class Game {
         this.flipped = false;
         this.winner = null;
 
+        // Randomly pick background and Bob variant
+        this.useAltBg = Math.random() < 0.5;
+        this.bgAltFrame = 0;
+        this.bgAltTimer = 0;
+        this.useAltBob = Math.random() < 0.5;
+
         this.players[0].reset();
         this.players[1].reset();
         this.ball.reset();
@@ -723,6 +732,16 @@ export class Game {
         this._debugKeyWasDown = tDown;
 
         this.splash.update(dt);
+
+        // Animate alt background
+        if (this.useAltBg) {
+            this.bgAltTimer += dt;
+            const frameDur = 1 / CONFIG.BG_ALT_FPS;
+            if (this.bgAltTimer >= frameDur) {
+                this.bgAltTimer -= frameDur;
+                this.bgAltFrame = (this.bgAltFrame + 1) % CONFIG.BG_ALT_IMAGES.length;
+            }
+        }
 
         switch (this.playState) {
             case PLAY_STATE.AIMING:
@@ -1094,10 +1113,15 @@ export class Game {
         }
     }
 
+    _getCurrentBgSprite() {
+        if (this.useAltBg) return `bgAlt${this.bgAltFrame}`;
+        return 'background';
+    }
+
     drawPlaying() {
         // Draw scene: background → table → cups
-        this.renderer.drawBackground();
-        this.renderer.drawBob();
+        this.renderer.drawBackground(this._getCurrentBgSprite());
+        this.renderer.drawBob(this.useAltBob);
         this.renderer.drawTable();
 
         // Draw order: far cups (top) → near cups (bottom) → ball on top
@@ -1207,8 +1231,8 @@ export class Game {
         const ctx = this.renderer.ctx;
 
         // Background
-        this.renderer.drawBackground();
-        this.renderer.drawBob();
+        this.renderer.drawBackground(this._getCurrentBgSprite());
+        this.renderer.drawBob(this.useAltBob);
         this.renderer.drawTable();
         this.drawCupsForDisplay();
 
@@ -1409,7 +1433,7 @@ export class Game {
     drawTestMode() {
         // Draw scene same as playing
         this.renderer.drawBackground();
-        this.renderer.drawBob();
+        this.renderer.drawBob(this.useAltBob);
         this.renderer.drawTable();
 
         // Far cups + their hit zones

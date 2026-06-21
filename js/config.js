@@ -7,8 +7,15 @@ export const CONFIG = {
     CANVAS_WIDTH: 1200,
     CANVAS_HEIGHT: 900,
 
-    // Background image
+    // Backgrounds — one static, one animated (randomly chosen per game)
     BG_IMAGE: 'assets/spritesheets/tempbackground.png',
+    BG_ALT_IMAGES: [
+        'assets/spritesheets/background1.png',
+        'assets/spritesheets/background2.png',
+        'assets/spritesheets/background3.png',
+        'assets/spritesheets/background4.png',
+    ],
+    BG_ALT_FPS: 6,             // animation speed for alt background
 
     // Player arm image
     ARM_IMAGE: 'assets/spritesheets/arm_with_ping_pong.png',
@@ -28,9 +35,13 @@ export const CONFIG = {
 
     // Drunk Bob character (stands behind the far end of the table)
     BOB_IMAGE: 'assets/spritesheets/drunk_bob.png',
+    BOB_ALT_IMAGE: 'assets/spritesheets/drunk_bob2.png',
     BOB_WIDTH: 240,
     BOB_HEIGHT: 281,
+    BOB_ALT_WIDTH: 180,        // drunk_bob2 at 50% size
+    BOB_ALT_HEIGHT: 211.5,
     BOB_OFFSET_Y: -170,        // shift up from table top edge (negative = higher)
+    BOB_ALT_OFFSET_Y: -130,     // adjusted for smaller size
 
     // Table image — scaled 1.255x from native 408x612 (92% of previous 1.364x)
     TABLE_IMAGE: 'assets/spritesheets/BobPong_Table.png',

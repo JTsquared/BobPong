@@ -15,8 +15,8 @@ export class Renderer {
         this.ctx.clearRect(0, 0, CONFIG.CANVAS_WIDTH, CONFIG.CANVAS_HEIGHT);
     }
 
-    drawBackground() {
-        const bg = this.sprites.get('background');
+    drawBackground(spriteName = 'background') {
+        const bg = this.sprites.get(spriteName);
         if (bg) {
             this.ctx.drawImage(bg, 0, 0, CONFIG.CANVAS_WIDTH, CONFIG.CANVAS_HEIGHT);
         } else {
@@ -25,14 +25,18 @@ export class Renderer {
         }
     }
 
-    drawBob() {
-        const bob = this.sprites.get('bob');
+    drawBob(useAlt = false) {
+        const spriteName = useAlt ? 'bobAlt' : 'bob';
+        const bob = this.sprites.get(spriteName);
         if (!bob) return;
 
-        // Position Bob centered behind the far end of the table
-        const x = CONFIG.TABLE_X + CONFIG.TABLE_DRAW_WIDTH / 2 - CONFIG.BOB_WIDTH / 2;
-        const y = CONFIG.TABLE_Y + (CONFIG.BOB_OFFSET_Y || 0);
-        this.ctx.drawImage(bob, x, y, CONFIG.BOB_WIDTH, CONFIG.BOB_HEIGHT);
+        const w = useAlt ? CONFIG.BOB_ALT_WIDTH : CONFIG.BOB_WIDTH;
+        const h = useAlt ? CONFIG.BOB_ALT_HEIGHT : CONFIG.BOB_HEIGHT;
+        const offsetY = useAlt ? (CONFIG.BOB_ALT_OFFSET_Y || 0) : (CONFIG.BOB_OFFSET_Y || 0);
+
+        const x = CONFIG.TABLE_X + CONFIG.TABLE_DRAW_WIDTH / 2 - w / 2;
+        const y = CONFIG.TABLE_Y + offsetY;
+        this.ctx.drawImage(bob, x, y, w, h);
     }
 
     drawTable() {

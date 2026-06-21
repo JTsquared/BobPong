@@ -27,9 +27,13 @@ export class SpriteLoader {
 
     loadAll() {
         this.load('background', CONFIG.BG_IMAGE);
+        CONFIG.BG_ALT_IMAGES.forEach((src, i) => {
+            this.load(`bgAlt${i}`, src);
+        });
         this.load('table', CONFIG.TABLE_IMAGE);
         this.load('cup', CONFIG.CUP_IMAGE);
         this.load('bob', CONFIG.BOB_IMAGE);
+        this.load('bobAlt', CONFIG.BOB_ALT_IMAGE);
         this.load('arm', CONFIG.ARM_IMAGE);
         this.load('throwSheet', CONFIG.THROW_SHEET);
     }
